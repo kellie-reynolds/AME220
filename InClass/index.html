@@ -6,26 +6,58 @@
 	<style>
 		img {
 			margin: auto;
+			display:block;
+		}
+		
+		.navB {
+			position: absolute;
+			top: calc(50% - 20px);
 		}
 
 		button#prev {
-			position: absolute;
 			left: 10px;
 
 		}
 		button#next {
-			position: absolute;
 			right: 10px;
 		}
 	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		var current = 0;
+		function start()
+		{
+			$(".container img").fadeOut(0);
+			$(".container img:nth-of-type(1)").fadeIn(500);
+		}
+		function goPrevSlide()
+		{
+			var prev = (current + 4 - 1)%4;
+			console.log("Prev clicked");
+			$(".container img:nth-of-type("+ (current + 1) + ")").stop().fadeOut(0);
+			$(".container img:nth-of-type("+ (prev + 1) + ")").stop().fadeIn();
+			current = prev;
+		}
+		function goNextSlide()
+		{
+			var next = (current + 1)%4;
+			console.log("Next clicked");
+			$(".container img:nth-of-type("+ (current + 1) + ")").stop().fadeOut();
+			$(".container img:nth-of-type("+ (next + 1) + ")").stop().fadeIn();
+			current = next;
+		}
+	</script>
 </head>
 
-<body>
-	<button id='prev'><</button>
-	<button id='next'>></button>
+<body onload='start()'>
+	<button onclick="goPrevSlide()" class = "navB" id='prev'><</button>
+	<button onclick="goNextSlide()" class="navB" id='next'>></button>
 
-	<div>
+	<div class="container">
 		<img src="img1.jpg">
+		<img src="img2.jpg">
+		<img src="img3.jpg">
+		<img src="img4.jpg">
 	</div>
 </body>
 </html>

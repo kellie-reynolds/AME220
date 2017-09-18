@@ -9,7 +9,7 @@
 		
 		header
 		{
-			background: powderblue;
+			background: powderblue ;
 			color: black;
 			margin: 20px 0 20px 0;
 			padding: 20px;
@@ -26,17 +26,37 @@
 		}
 		table
 		{
-			
+			border: black 1px solid;
 		}
-		tr
+		tr:nth-of-type(even)
 		{
-			border-right: black 1px solid;
+			background-color: rgba(0,0,0,.1);
+		}
+		tr:last-of-type td
+		{
+			border-bottom: none;
+		}
+		tr td:first-of-type
+		{
+			border-left: none;
 		}
 		td
 		{
-			border-bottom: black 1px dashed;
+			border-left: black 1px solid;
+			border-bottom: black 1px solid;
+			padding = 10px;
+			margin = 0px;
 		}
-		
+		tr:first-of-type td
+		{
+			background: black;
+			color: white;
+			font-weight: bold;
+		}
+		#theName 
+		{
+			font-size: 100px;
+		}
 		
 	</style>
 </head>
@@ -44,7 +64,7 @@
 <body style="background-image: url('./background.png')">
 	<header>
 	<img src="bojack.png" alt="profile picture" height='200'>
-	<h1>Bojack Horseman</h1>
+	<h1 id="theName">Bojack Horseman</h1>
 	<h2><a href="tel:523-555-5389">(523)555-5389</a> | <a href="mailto:bojack@horsinaround.com">bojack@horsinaround.com</a></h2>
 	</header>
 	<hr>
@@ -57,20 +77,29 @@
 			<li><strong>Carl Weathers' Acting Academy</strong>: 1989-1990</li>
 		</ul>
 	<h3>Skills</h3>
-		<table>
-			<tr>
-				<td><strong>Actor</strong></td>
-				<td>dramatic acting, sitcom experience, standup comedy</td>
-			</tr>
-			<tr>
-				<td><strong>Celebrity</strong></td>
-				<td>subject of <em>One Trick Pony</em> by Diana Nguyen, guest on <em>Hollywoo Stars and Celebrities: What Do They Know? Do They Know Things?? Let's Find Out!</em></td>
-			</tr>
-			<tr>
-				<td><strong>Other</strong></td>
-				<td>owner of Restaraunt Elefante, famous party host</td>
-			</tr>
-		</table>
+	<table>
+		
+		<tr>
+			<td>Actor</td>
+			<td>Celebrity</td>
+			<td>Other</td>
+		</tr>
+		<tr>
+			<td>dramatic acting</td>
+			<td>subject of <em>One Trick Pony</em> by Diana Nguyen</em></td>
+			<td>owner of Restaraunt Elefante</td>
+		</tr>
+		<tr>
+			<td>sitcom experience</td>
+			<td>guest on <em>Hollywoo Stars and Celebrities: What Do They Know? Do They Know Things?? Let's Find Out!</em></td>
+			<td>famous party host</td>
+		</tr>
+		<tr>
+			<td>stand-up comedy</td>
+			<td>nominee for the Animal Choice Awards</td>
+			<td>jogger</td>
+		</tr>
+	</table>
 	<h3>Projects</h3>
 		<ul>
 			<li><strong>Secretariat (2016)</strong>: digitally added as role of Secretariat</li>
