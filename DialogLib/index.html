@@ -1,15 +1,21 @@
 <!doctype html>
 <html>
 <head>
-<script src="dialog.js"></script>
+<script src='dialog.js'> </script>
+
 <script>
 function alertClicked()
 {
+  dialogLib.alert.show("Testing")
 }
 </script>
 </head>
 
 <body>
-
+<button onclick='alertClicked'> Alert demo </button>
+<button onclick='promptClicked'> Prompt demo </button>
+<button onclick='confirmClicked'> Confirm demo </button>
 </body>
+
+
 </html>
