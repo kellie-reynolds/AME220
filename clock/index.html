@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+	<title>Clock</title>
+	<style>
+		#clock{
+			border: 2px solid;
+			height: 300px;
+			width: 300px;
+			border-radius: 300px;
+			margin: auto;
+		}	
+		
+		.numbers{
+			position: absolute;
+			margin-top: 142px;
+			margin-left: 148px;
+			font-size: 20px;
+		}
+		
+		#num12{
+			transform: rotate(-90deg) translate(145px);
+		}
+		#num1{
+			transform: rotate(-60deg) translate(145px);
+		}
+		#num2{
+			transform: rotate(-30deg) translate(145px);
+		}
+		#num3{
+			transform: rotate(0deg) translate(145px);
+		}
+		#num4{
+			transform: rotate(30deg) translate(145px);
+		}
+		#num5{
+			transform: rotate(60deg) translate(145px);
+		}
+		#num6{
+			transform: rotate(90deg) translate(145px);
+		}
+		#num7{
+			transform: rotate(120deg) translate(145px);
+		}
+		#num8{
+			transform: rotate(150deg) translate(145px);
+		}
+		#num9{
+			transform: rotate(180deg) translate(145px);
+		}
+		#num10{
+			transform: rotate(210deg) translate(145px);
+		}
+		#num11{
+			transform: rotate(240deg) translate(145px);
+		}
+		
+		.needles{
+			position: absolute;
+			height: 100px;
+			transform-origin: 0%;
+			margin-left: 150px;
+			margin-right: 150px;
+		}
+		
+		#secondHand{
+			width: 150px;
+			background: red;
+		}
+		
+		#minuteHand{
+			width: 140px;
+			background: black;
+		}
+		
+		#hourHand{
+			width: 130px;
+			background: gray;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="clock">
+		<div class="numbers" id="num1"> - </div>
+		<div class="numbers" id="num2"> - </div>
+		<div class="numbers" id="num3"> - </div>
+		<div class="numbers" id="num4"> - </div>
+		<div class="numbers" id="num5"> - </div>
+		<div class="numbers" id="num6"> - </div>
+		<div class="numbers" id="num7"> - </div>
+		<div class="numbers" id="num8"> - </div>
+		<div class="numbers" id="num9"> - </div>
+		<div class="numbers" id="num10"> - </div>
+		<div class="numbers" id="num11"> - </div>
+		<div class="numbers" id="num12"> - </div>
+		<div class="needle" id="secondHand"> </div>
+		<div class="needle" id="minuteHand"> </div>
+		<div class="needle" id="hourHand"> </div>
+		
+	</div>
+</body>
+</html>

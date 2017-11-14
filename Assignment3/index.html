@@ -9,7 +9,6 @@ var round = Math.round;
 var min = Math.min;
 var max = Math.max;
 var ceil = Math.ceil;
-module.exports = hsv2rgb;
 function set(r, g, b, out) {
   out[0] = round(r * 255);
   out[1] = round(g * 255);
@@ -41,8 +40,8 @@ function hsv2rgb(h, s, v, out) {
   }
   return out;
 }
-   </script>
-  <script>
+</script>
+<script>
     var current = 0;
     var imageURLs = "";
     function start(){
@@ -52,7 +51,7 @@ function hsv2rgb(h, s, v, out) {
       for(var i = 0; i < imageURLs.length; i++){
         var url = imageURLs[i];
         mu += '<div class="slide" style="background-image:url(' + url + ')"> </div>';
-        muT += '<div class="num">' + (i + 1) + '</div>'
+        muT += '<button onClick="numClicked(event)" class="num">' + (i + 1) + '</button>'
       }
       //$("#container").html(mu);
       document.getElementById("container").innerHTML = mu;
@@ -98,6 +97,35 @@ function hsv2rgb(h, s, v, out) {
       console.log(c, cv);
       return "rgb(" + cv[0] + "," + cv[1] + "," + cv[2] + ")";
     }
+	
+	function numClicked(click){
+		var nextSlide = parseInt(click.target.innerHTML) - 1;
+		goToSlide(nextSlide);
+	}
+	
+	function goToSlide(slideNum){
+	  var n = imageURLs.length;
+      var next = slideNum;
+      var slides = document.getElementById("container").getElementsByClassName("slide");
+      var trackNos = document.getElementById("track").getElementsByClassName("num");
+	  
+	if(current > next){  
+		$("#container .slide:nth-of-type(" + (current + 1)+ ")").stop().animate({"margin-left":"100%"});
+		$("#container .slide:nth-of-type(" + (next+ 1)+ ")").stop().css({"margin-left": "-100%", "display": "block"}).animate({"margin-left": "0%"}) // fadein next slide
+		$("#track .num:nth-of-type(" + (current + 1) + ")").removeClass("selected");
+		$("#track .num:nth-of-type(" + (next + 1) + ")").addClass("selected");
+		current = next; // set new current slide    
+		$("#container").css({"background": getBGColor(current)});
+	}
+	else{
+	  $("#container .slide:nth-of-type(" + (current + 1)+ ")").stop().animate({"margin-left":"-100%"});
+      $("#container .slide:nth-of-type(" + (next+ 1)+ ")").stop().css({"margin-left": "100%", "display": "block"}).animate({"margin-left": "0%"}) // fadein next slide
+      $("#track .num:nth-of-type(" + (current + 1) + ")").removeClass("selected");
+      $("#track .num:nth-of-type(" + (next + 1) + ")").addClass("selected");
+      current = next; // set new current slide
+      $("#container").css({"background": getBGColor(current)});
+	}
+	}
   </script>
   <style>
     body{
