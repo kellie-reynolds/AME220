@@ -16,4 +16,4 @@ Kellie Reynolds AME220
 
 **7 - complete**
 
-8 - not assigned yet
+8 - not complete
