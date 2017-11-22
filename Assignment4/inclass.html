@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script> 
+var data_y;
+
+var dialogLib = {
+  alert:{
+    _CB: function(){},
+    _bClicked: function(){
+      _CB();
+      $(".wrapper").remove();
+    },
+    show: function(msg, label, callback){
+      _CB = callback = callback || function(){};
+      label = label || "OK";
+      var outS = "";
+      outS += "<div class='wrapper'>" +
+          "<div class='frame'>" +
+            "<h1>" + msg + "</h1>"+
+            "<button onclick='dialogLib.alert._bClicked()'>" + label + "</button>"+
+          "</div>"+
+        "</div>";
+      $("body").append(outS);
+    }
+  },
+
+  confirm:{
+    _yesClicked: function(){
+      _yCB();
+      dialogLib.confirm.hide();  
+    },
+    _noClicked: function(){
+      _nCB();
+      dialogLib.confirm.hide();  
+    },
+    _yCB: function(){},
+    _nCB: function(){},
+    show: function(msg, yesLabel, noLabel, yesCB, noCB){
+      yesLabel = yesLabel || "OK";
+      noLabel = noLabel || "Cancel";
+      _yCB = yesCB = yesCB || function(){};
+      _nCB = noCB = noCB || function(){};
+
+      var outS = "";
+      outS += "<div class='wrapper'>" +
+          "<div class='frame'>" +
+            "<h1>" + msg + "</h1>"+
+            "<button onclick='dialogLib.confirm._noClicked()'>" + noLabel + "</button>"+
+            "<button onclick='dialogLib.confirm._yesClicked()'>" + yesLabel + "</button>"+
+          "</div>"+
+        "</div>";
+      $("body").append(outS);
+    },
+    hide: function(){
+      $(".wrapper").remove();
+    }
+  },
+
+  prompt:{
+    _yCB: function(){},
+    _nCB: function(){},
+    _yesClicked: function(){
+      var val = $(".wrapper .frame .userInput").val();
+      _yCB(val);
+      $(".wrapper").remove();
+    },
+    _noClicked: function(){
+      var val = $(".wrapper .frame .userInput").val();
+      _nCB(val);
+      $(".wrapper").remove();
+    },
+    _handleKD: function(e){
+	var key = e.key.toLowerCase();
+	if(key == "escape"){
+	   dialogLib.prompt._noClicked();
+	}
+	else if(key == "enter"){
+	   dialogLib.prompt._yesClicked();
+	}
+    },
+
+    show: function(msg, yesLabel, noLabel, yesCB, noCB){
+      yesLabel = yesLabel || "OK";
+      noLabel = noLabel || "Cancel";
+      _yCB = yesCB = yesCB || function(){};
+      _nCB = noCB = noCB || function(){};
+      var outS = "";
+      outS += "<div class='wrapper'>" +
+          "<div class='frame'>" +
+            "<h1>" + msg + "</h1>"+
+            "<input onkeydown='dialogLib.prompt._handleKD(event)' type='text' class='userInput'/>"+
+            "<button onclick='dialogLib.prompt._noClicked()'>" + noLabel + "</button>"+
+            "<button onclick='dialogLib.prompt._yesClicked()'>" + yesLabel + "</button>"+
+          "</div>"+
+        "</div>";
+      $("body").append(outS);
+      $(".wrapper .frame .userInput").focus();
+    }
+  }
+}
+</script>
+<style>
+.wrapper{
+  position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.7);
+}
+
+.frame{
+      width: 300px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    margin-top: 100px;
+    padding-bottom: 40px;
+    box-shadow: 0px 0px 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+</style>
+
+<script>
+var alertClicked = function()
+{
+  dialogLib.alert.show("There is no spoon", "OK, I know", function(){alert("user clicked ok")});
+}
+function confirmClicked()
+{
+  dialogLib.confirm.show("Is the Universe is infinite?", "Yes", "No", function(){alert("user says yes!")}, function(){alert("User says no")});
+}
+function promptClicked()
+{
+  dialogLib.prompt.show("Enter Name:", "OK, continue", "Cancel", function(data){alert("YES! " + data)}, function(data){alert("NO! " + data)});
+}
+</script>
+</head>
+
+<body>
+  <button onclick='alertClicked()'> Alert demo </button>
+  <button onclick='confirmClicked()'> Confirm demo </button>
+  <button onclick='promptClicked()'> Prompt demo </button>
+</body>
+
+
+</html>
