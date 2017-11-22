@@ -5,28 +5,19 @@
 	<script>
 		function setTime(){
 			//get time in UTC
-			var dateObj = new Date();
-			var hours = dateObj.getUTCHours();
-			var minutes = dateObj.getUTCMinutes();
-			var seconds = dateObj.getUTCSeconds();
-			console.log(hours,minutes,seconds);
-			
-			//offset for timezone
-			var offset = document.getElementById("DropDownTimezone").value;
-			console.log(offset);
-			hours = hours + Math.floor(offset);
-			if(offset % 1)
-			{
-				minutes + 30;
-			}
+			var offset = parseFloat(document.getElementById("DropDownTimezone").value);
+			var dObj = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60*1000 + offset*60*60*1000);
+			var hours = dObj.getHours();
+			var minutes = dObj.getMinutes();
+			var seconds = dObj.getSeconds();
 			console.log(hours,minutes,seconds);
 			
 			//day or night
 			if(hours < 5 && hours > 17) {
-				document.getElementById("clock").className = "nightStyle";
+				document.getElementById("clock").className = "dayStyle";
 			}
 			else {
-				document.getElementById("clock").className = "dayStyle";
+				document.getElementById("clock").className = "nightStyle";
 			}
 			
 			
