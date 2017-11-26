@@ -8,9 +8,9 @@ Kellie Reynolds AME220
 
 **3 - complete**
 
-4 - not complete
+**4 - complete**
 
-5 - not complete
+**5 - complete**
 
 **6 - complete**
 
