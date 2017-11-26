@@ -3,29 +3,10 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script> 
-	var data_y;
+var data_y;
 
 var dialogLib = {
   login:{
-    _CB: function(){},
-    _bClicked: function(){
-		_CB();
-		$(".wrapper").remove();
-    },
-    show: function(callback){
-    }
-  },
-
-  signup:{
-    _CB: function(){},
-    _bClicked: function(){
-    },
-    show: function(callback){
-    }
-  }
-  
-  
-  prompt:{
     _yCB: function(){},
     _nCB: function(){},
     _yesClicked: function(){
@@ -41,33 +22,89 @@ var dialogLib = {
     _handleKD: function(e){
 	var key = e.key.toLowerCase();
 	if(key == "escape"){
-	   dialogLib.prompt._noClicked();
+	   dialogLib.login._noClicked();
 	}
 	else if(key == "enter"){
-	   dialogLib.prompt._yesClicked();
+	   dialogLib.login._yesClicked();
 	}
     },
-
-    show: function(msg, yesLabel, noLabel, yesCB, noCB){
-      yesLabel = yesLabel || "OK";
-      noLabel = noLabel || "Cancel";
-      _yCB = yesCB = yesCB || function(){};
-      _nCB = noCB = noCB || function(){};
-      var outS = "";
-      outS += "<div class='wrapper'>" +
-          "<div class='frame'>" +
-            "<h1>" + msg + "</h1>"+
-            "<input onkeydown='dialogLib.prompt._handleKD(event)' type='text' class='userInput'/>"+
-            "<button onclick='dialogLib.prompt._noClicked()'>" + noLabel + "</button>"+
-            "<button onclick='dialogLib.prompt._yesClicked()'>" + yesLabel + "</button>"+
+    show: function(promptUser, promptPassword, yesLabel, noLabel, yesCB, noCB){
+		yesLabel = yesLabel || "OK";
+		noLabel = noLabel || "Cancel";
+		_yCB = yesCB = yesCB || function(){};
+		_nCB = noCB = noCB || function(){};
+		var outS = "";
+		outS += "<div class='wrapper'>" +
+			"<div class='frame'>" +
+			"<p>" + promptUser + "</p>" +
+		"<input onkeydown='dialogLib.login._handleKD(event)' type='text' class='userInput'/>"+
+		"<p>" + promptPassword + "</p>" +
+		"<input onkeydown='dialogLib.login._handleKD(event)' type='text' class='userInput'/>"+
+            "<button onclick='dialogLib.login._noClicked()'>" + noLabel + "</button>"+
+            "<button onclick='dialogLib.login._yesClicked()'>" + yesLabel + "</button>"+
           "</div>"+
         "</div>";
-      $("body").append(outS);
-      $(".wrapper .frame .userInput").focus();
+		$("body").append(outS);
+		$(".wrapper .frame .userInput").focus();
     }
+  },
+
+  signup:{
+    _yCB: function(){},
+    _nCB: function(){},
+    _yesClicked: function(){
+      var val = $(".wrapper .frame .userInput").val();
+      _yCB(val);
+      $(".wrapper").remove();
+    },
+    _noClicked: function(){
+      var val = $(".wrapper .frame .userInput").val();
+      _nCB(val);
+      $(".wrapper").remove();
+    },
+    _handleKD: function(e){
+	var key = e.key.toLowerCase();
+	if(key == "escape"){
+	   dialogLib.signup._noClicked();
+	}
+	else if(key == "enter"){
+	   dialogLib.signup._yesClicked();
+	}
+    },
+    show: function(promptUser, promptPassword, yesLabel, noLabel, yesCB, noCB){
+		yesLabel = yesLabel || "OK";
+		noLabel = noLabel || "Cancel";
+		_yCB = yesCB = yesCB || function(){};
+		_nCB = noCB = noCB || function(){};
+		var outS = "";
+		outS += "<div class='wrapper'>" +
+			"<div class='frame'>" +
+			"<p>" + promptUser + "</p>" +
+		"<input onkeydown='dialogLib.signup._handleKD(event)' type='text' class='userInput'/>"+
+		"<p>" + promptPassword + "</p>" +
+		"<input onkeydown='dialogLib.signup._handleKD(event)' type='text' class='userInput'/>"+
+            "<button onclick='dialogLib.signup._noClicked()'>" + noLabel + "</button>"+
+            "<button onclick='dialogLib.signup._yesClicked()'>" + yesLabel + "</button>"+
+          "</div>"+
+        "</div>";
+		$("body").append(outS);
+		$(".wrapper .frame .userInput").focus();
+    }
+  },
+ }
+</script>
+<link rel="stylesheet" type="text/css" href="dialog.css">
+
+<script>
+var loginClicked = function()
+{
+  dialogLib.login.show("Username:", "Password:", "OK", "Cancel", function(data){alert("Greetings old friend!")},function(data){alert("Perhaps you meant to sign up?")});
+}
+function signupClicked()
+{
+  dialogLib.signup.show("Username:","Password:", "Signup", "Cancel", function(data){alert("Welcome to the club!")},function(data){alert("Come back any time!")});
 }
 </script>
-
 <style>
 .wrapper{
   position: fixed;
@@ -90,18 +127,6 @@ var dialogLib = {
     text-align: center;
 }
 </style>
-
-<script>
-var loginClicked = function()
-{
-  dialogLib.login.show(function(user, pass){alert(user, pass)});
-}
-function signupClicked()
-{
-  dialogLib.signup.show(function(user, pass){alert(user, pass)});
-}
-</script>
-
 </head>
 
 <body>
